@@ -2191,6 +2191,271 @@ textarea.form-control {
 }
 
 /* ==========================================================================
+   Litt.ly Integration & Official Channels Hub Styles
+   ========================================================================== */
+
+/* KakaoTalk CTA Button */
+.btn-kakao {
+  background: #FEE500 !important;
+  color: #191919 !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(254, 229, 0, 0.42);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-kakao:hover {
+  background: #FADA0A !important;
+  color: #000000 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(250, 218, 10, 0.55);
+}
+
+/* Hero Official Authority Strip */
+.hero-authority-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: -1.4rem;
+  margin-bottom: 2.2rem;
+}
+
+.authority-strip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #1E3A8A;
+  background: #EFF6FF;
+  padding: 0.32rem 0.72rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  white-space: nowrap;
+}
+
+.authority-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  background: #FFFFFF;
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  text-decoration: none;
+}
+
+.authority-pill-link:hover {
+  color: #1D4ED8;
+  border-color: #93C5FD;
+  background: #EFF6FF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+}
+
+.authority-pill-link.naver:hover {
+  color: #03C75A;
+  border-color: #86EFAC;
+  background: #F0FDF4;
+}
+
+.authority-pill-link.youtube:hover {
+  color: #DC2626;
+  border-color: #FCA5A5;
+  background: #FEF2F2;
+}
+
+.authority-pill-link.kakao:hover {
+  color: #78350F;
+  border-color: #FCD34D;
+  background: #FFFBEB;
+}
+
+/* Official Channels & Media Hub Section */
+.channels-hub {
+  padding: 6.5rem 0;
+  background: linear-gradient(180deg, #F8FAFD 0%, #F1F5F9 50%, var(--bg-primary) 100%);
+  position: relative;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.channels-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.35rem;
+  margin-top: 2.8rem;
+}
+
+.channel-hub-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  padding: 1.55rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.channel-hub-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.channel-hub-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  border-color: rgba(37, 99, 235, 0.28);
+}
+
+.channel-hub-card.naver:hover::before { background: #03C75A; }
+.channel-hub-card.kyobo:hover::before { background: #1E3A8A; }
+.channel-hub-card.kakao:hover::before { background: #FEE500; }
+.channel-hub-card.youtube:hover::before { background: #FF0000; }
+.channel-hub-card.music:hover::before { background: #8B5CF6; }
+.channel-hub-card.blog:hover::before { background: #03C75A; }
+.channel-hub-card.cafe:hover::before { background: #2DB400; }
+.channel-hub-card.dcg:hover::before { background: #2563EB; }
+.channel-hub-card.littly:hover::before { background: #F97316; }
+
+.channel-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.channel-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.channel-icon-wrap.naver { background: rgba(3, 199, 90, 0.12); color: #03C75A; }
+.channel-icon-wrap.kyobo { background: rgba(30, 58, 138, 0.1); color: #1E3A8A; }
+.channel-icon-wrap.kakao { background: #FEE500; color: #191919; }
+.channel-icon-wrap.youtube { background: rgba(255, 0, 0, 0.1); color: #FF0000; }
+.channel-icon-wrap.music { background: rgba(139, 92, 246, 0.12); color: #8B5CF6; }
+.channel-icon-wrap.blog { background: rgba(3, 199, 90, 0.12); color: #03C75A; }
+.channel-icon-wrap.cafe { background: rgba(45, 180, 0, 0.12); color: #2DB400; }
+.channel-icon-wrap.dcg { background: rgba(37, 99, 235, 0.12); color: #1D4ED8; }
+.channel-icon-wrap.littly { background: rgba(249, 115, 22, 0.12); color: #F97316; }
+
+.channel-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--radius-full);
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+.channel-title {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.35;
+  margin-bottom: 0.45rem;
+}
+
+.channel-desc {
+  font-size: 0.85rem;
+  color: #64748B;
+  line-height: 1.62;
+  margin-bottom: 1.3rem;
+  flex-grow: 1;
+}
+
+.channel-link-action {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #1D4ED8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: gap var(--transition-fast);
+}
+
+.channel-hub-card:hover .channel-link-action {
+  gap: 0.55rem;
+}
+
+/* Contact Card Kakao */
+.contact-card-kakao {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.4rem;
+  background: #FFFBEB;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid #FCD34D;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-card-kakao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.15);
+  background: #FEF3C7;
+  border-color: #F59E0B;
+}
+
+.contact-card-kakao .kakao-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #FEE500;
+  color: #191919;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.contact-card-kakao h5 {
+  font-size: 0.85rem;
+  color: #92400E;
+  font-weight: 700;
+}
+
+.contact-card-kakao .kakao-channel-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #191919;
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
 @media (max-width: 1024px) {
@@ -2224,6 +2489,11 @@ textarea.form-control {
 
   .inquiry-meta-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .channels-hub-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
   }
 }
 
@@ -2367,5 +2637,14 @@ textarea.form-control {
   .admin-dash-actions {
     padding-right: 0;
     justify-content: space-between;
+  }
+
+  .channels-hub-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .hero-authority-strip {
+    gap: 0.4rem;
   }
 }
