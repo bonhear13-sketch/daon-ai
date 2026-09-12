@@ -525,16 +525,38 @@ button {
 .nav-toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
-  width: 26px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  background: transparent;
 }
 
 .nav-toggle span {
   display: block;
-  height: 2.5px;
+  width: 22px;
+  height: 2.4px;
   background-color: var(--accent-navy);
   border-radius: 2px;
+  transition: transform 0.28s ease, opacity 0.2s ease;
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(7.4px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-7.4px) rotate(-45deg);
 }
 
 /* Mobile Drawer Menu is COMPLETELY HIDDEN on desktop */
@@ -663,6 +685,10 @@ button {
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 2.8rem;
+}
+
+.sub-actions-row {
+  display: contents;
 }
 
 .btn-trust-blue {
@@ -1544,8 +1570,9 @@ button {
   border: 1.5px solid var(--border-subtle);
   border-radius: var(--radius-md);
   color: var(--accent-navy);
-  font-size: 0.92rem;
+  font-size: 16px; /* Prevents iOS Safari auto-zoom on input focus */
   transition: all var(--transition-fast);
+  min-height: 48px;
 }
 
 .form-control:focus {
@@ -2554,7 +2581,24 @@ textarea.form-control {
   }
 }
 
+/* Mobile Floating Sticky Bottom Contact Bar (Hidden by default, shown on <= 768px) */
+.mobile-sticky-bottom-bar {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  body {
+    padding-bottom: 74px; /* Space so content is never hidden behind the sticky bottom bar */
+  }
+
+  body.menu-open {
+    overflow: hidden !important; /* Locks background scrolling when mobile drawer is open */
+  }
+
+  .site-header {
+    padding: 0.65rem 0;
+  }
+
   .phone-quick-pill {
     display: none !important;
   }
@@ -2576,43 +2620,405 @@ textarea.form-control {
   }
 
   .brand-title {
-    font-size: 1.1rem;
+    font-size: 1.08rem;
     line-height: 1.2;
   }
 
   .brand-sub {
-    font-size: 0.65rem;
+    font-size: 0.64rem;
   }
 
   .btn-header-cta {
-    padding: 0.44rem 0.95rem;
-    font-size: 0.8rem;
+    padding: 0.44rem 0.92rem;
+    font-size: 0.78rem;
+    gap: 0.3rem;
+  }
+
+  .btn-header-cta svg {
+    display: none;
   }
 
   .nav-actions {
+    gap: 0.4rem;
+  }
+
+  /* Typography on Mobile */
+  .section-title {
+    font-size: 1.85rem;
+    line-height: 1.3;
+    margin-bottom: 0.9rem;
+  }
+
+  .section-desc {
+    font-size: 0.94rem;
+    line-height: 1.68;
+    margin-bottom: 2rem;
+  }
+
+  /* Hero Section on Mobile */
+  .hero {
+    padding-top: 5.6rem;
+    padding-bottom: 3.2rem;
+    min-height: auto;
+  }
+
+  .hero-trust-badge {
+    font-size: 0.74rem;
+    padding: 0.38rem 0.82rem;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.42;
+    margin-bottom: 1.1rem;
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.45rem);
+    line-height: 1.22;
+    margin-bottom: 1rem;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.68;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.8rem;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.95rem;
+    min-height: 48px;
+  }
+
+  .hero-actions .sub-actions-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .hero-actions .sub-actions-row .btn {
+    padding: 0.75rem 0.6rem;
+    font-size: 0.86rem;
+  }
+
+  .hero-authority-strip {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.45rem;
+    margin-top: -0.6rem;
+    margin-bottom: 1.8rem;
+    width: 100%;
+  }
+
+  .authority-strip-label {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.74rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .authority-pill-link {
+    flex: 1 1 calc(50% - 0.45rem);
+    justify-content: center;
+    text-align: center;
+    font-size: 0.76rem;
+    padding: 0.48rem 0.4rem;
+    min-height: 38px;
   }
 
   .hero-stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+    gap: 0.65rem;
+    padding-top: 1.4rem;
+  }
+
+  .hero-stat-card {
+    padding: 0.85rem 0.8rem;
+  }
+
+  .stat-card-num {
+    font-size: 1.35rem;
+  }
+
+  .stat-card-label {
+    font-size: 0.72rem;
+  }
+
+  /* Profile Card on Mobile */
+  .hero-media-wrap {
+    max-width: 100%;
+  }
+
+  .profile-card-modern {
+    padding: 1.1rem;
+    max-width: 100%;
+  }
+
+  .profile-name {
+    font-size: 1.3rem;
+  }
+
+  .profile-alias {
+    font-size: 1.05rem;
+  }
+
+  .profile-role {
+    font-size: 0.82rem;
   }
 
   .profile-features-grid {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.55rem;
+  }
+
+  .profile-feature-pill {
+    padding: 0.72rem 0.85rem;
+  }
+
+  .profile-feature-pill .feature-text h6 {
+    font-size: 0.84rem;
+  }
+
+  .profile-quick-contact {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.55rem !important;
+    width: 100%;
+  }
+
+  .profile-call-link {
+    width: 100%;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    min-height: 44px;
+  }
+
+  /* Section Spacing on Mobile */
+  .about, .channels-hub, .programs, .history-reviews, .contact {
+    padding: 3.8rem 0;
+  }
+
+  .about-quote-box {
+    padding: 1.8rem 1.3rem;
+  }
+
+  .about-quote-box blockquote {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .quote-mark {
+    font-size: 2.2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .credentials-list {
+    gap: 0.75rem;
+  }
+
+  .credential-item {
+    padding: 0.85rem 1rem;
+    font-size: 0.86rem;
   }
 
   .pillars-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .pillar-card {
+    padding: 1.6rem 1.3rem;
+  }
+
+  /* Channels Hub on Mobile */
+  .channels-hub-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.8rem;
+  }
+
+  .channel-hub-card {
+    padding: 1.35rem 1.2rem;
+  }
+
+  .channel-title {
+    font-size: 1.05rem;
+  }
+
+  .channel-desc {
+    font-size: 0.84rem;
+  }
+
+  /* Programs on Mobile */
+  .program-filter-bar {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.3rem 0.2rem 0.8rem;
+    margin-bottom: 1.8rem;
+    scrollbar-width: none;
+  }
+
+  .program-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.82rem;
+    padding: 0.52rem 1rem;
+    min-height: 38px;
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .program-card {
+    padding: 1.8rem 1.3rem;
+  }
+
+  .program-title {
+    font-size: 1.25rem;
+  }
+
+  .curriculum-highlights {
+    padding: 1rem 0.9rem;
+    gap: 0.5rem;
+  }
+
+  .curriculum-highlights li {
+    font-size: 0.84rem;
+  }
+
+  .program-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .program-footer .btn-detail {
+    justify-content: center;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.86rem;
+  }
+
+  .program-footer .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.78rem;
+    min-height: 44px;
+  }
+
+  /* Reviews & Timeline on Mobile */
+  .history-reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 2.8rem;
+  }
+
+  .timeline-wrap {
+    padding-left: 1.4rem;
+    margin-top: 1.4rem;
+  }
+
+  .timeline-item {
+    margin-bottom: 1.8rem;
+  }
+
+  .timeline-title {
+    font-size: 1.05rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.86rem;
+  }
+
+  .review-card {
+    padding: 1.4rem 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .review-quote {
+    font-size: 0.88rem;
+  }
+
+  /* Contact Section on Mobile */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    padding: 1.8rem 1.2rem;
+    gap: 2.2rem;
+  }
+
+  .contact-quick-cards {
+    gap: 0.85rem;
+  }
+
+  .contact-card-call, .contact-card-kakao {
+    padding: 1.1rem;
+    gap: 0.9rem;
+  }
+
+  .contact-card-call .call-icon, .contact-card-kakao .kakao-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.15rem;
+  }
+
+  .contact-card-call .phone-num {
+    font-size: 1.22rem;
+  }
+
+  .contact-card-kakao .kakao-channel-title {
+    font-size: 1.08rem;
+  }
+
+  .contact-info-list {
+    margin-top: 1.4rem;
+    gap: 1rem;
+  }
+
+  .contact-info-item {
+    gap: 0.75rem;
+  }
+
+  .contact-info-item p, .contact-info-item a {
+    font-size: 0.84rem;
   }
 
   .form-row {
     grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
   }
 
+  #formSubmitBtn {
+    padding: 0.9rem;
+    font-size: 1rem;
+    min-height: 50px;
+  }
+
+  /* Footer on Mobile */
   .footer-top {
     grid-template-columns: 1fr;
+    gap: 2.2rem;
   }
 
   .footer-bottom {
@@ -2621,8 +3027,50 @@ textarea.form-control {
     text-align: center;
   }
 
+  /* Modals on Mobile */
+  .modal-backdrop {
+    padding: 0.8rem;
+  }
+
+  .modal-content {
+    padding: 2.2rem 1.2rem 1.4rem;
+    border-radius: var(--radius-lg);
+    max-height: 88vh;
+  }
+
+  .modal-close-btn {
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+  }
+
+  .curriculum-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    font-size: 0.82rem;
+  }
+
+  .curriculum-table th, .curriculum-table td {
+    padding: 0.55rem 0.5rem;
+  }
+
+  .admin-login-content {
+    padding: 2rem 1.2rem 1.4rem;
+  }
+
+  .admin-dashboard-content {
+    padding: 1.6rem 1.1rem;
+  }
+
   .admin-stats-row {
     grid-template-columns: 1fr;
+    gap: 0.6rem;
   }
 
   .inquiry-meta-grid {
@@ -2639,12 +3087,75 @@ textarea.form-control {
     justify-content: space-between;
   }
 
-  .channels-hub-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  /* Mobile Sticky Bottom Floating Contact Bar */
+  .mobile-sticky-bottom-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(226, 232, 240, 0.95);
+    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+    padding: 0.6rem 1rem max(0.6rem, env(safe-area-inset-bottom));
+    gap: 0.65rem;
+    z-index: 950;
   }
 
-  .hero-authority-strip {
-    gap: 0.4rem;
+  .mobile-bottom-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.72rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    min-height: 46px;
+    transition: transform var(--transition-fast);
+  }
+
+  .mobile-bottom-btn:active {
+    transform: scale(0.97);
+  }
+
+  .mobile-bottom-btn.call {
+    background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28);
+  }
+
+  .mobile-bottom-btn.kakao {
+    background: #FEE500;
+    color: #191919;
+    box-shadow: 0 4px 12px rgba(254, 229, 0, 0.35);
+  }
+}
+
+/* Extra Small Phones (<= 375px) */
+@media (max-width: 375px) {
+  .brand-title {
+    font-size: 0.98rem;
+  }
+
+  .brand-sub {
+    font-size: 0.6rem;
+  }
+
+  .btn-header-cta {
+    padding: 0.36rem 0.72rem;
+    font-size: 0.72rem;
+  }
+
+  .authority-pill-link {
+    flex: 1 1 100%;
+  }
+
+  .hero-title {
+    font-size: 1.95rem;
   }
 }

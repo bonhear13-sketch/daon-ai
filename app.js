@@ -22,18 +22,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
   if (menuToggle && mobileMenu) {
+    const closeMobileMenu = () => {
+      mobileMenu.classList.remove('active');
+      menuToggle.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      mobileMenu.style.display = 'none';
+      menuToggle.setAttribute('aria-expanded', 'false');
+    };
+
     menuToggle.addEventListener('click', () => {
       const isActive = mobileMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active', isActive);
+      document.body.classList.toggle('menu-open', isActive);
       mobileMenu.style.display = isActive ? 'flex' : 'none';
       menuToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
     });
 
     mobileNavLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        mobileMenu.style.display = 'none';
-        menuToggle.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    const mobileMenuFooterLinks = mobileMenu.querySelectorAll('.mobile-menu-footer a');
+    mobileMenuFooterLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
     });
   }
 
