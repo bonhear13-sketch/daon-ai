@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김인숙 강사 (다온샘) — 20년차 IT·생성형 AI & 스마트폰 SNS 전문교육</title>
+  <meta name="description" content="배움에서 나눔으로! 20년 경력 IT 전문강사 김인숙(다온샘). 생성형 AI 챗GPT 지도사 자격과정, 스마트폰활용지도사, SNS 마케팅, 관공서 및 기업 워크숍 출강.">
+  <meta property="og:title" content="김인숙 강사 (다온샘) — IT·생성형 AI & 스마트폰 SNS 교육">
+  <meta property="og:description" content="스마트폰 하나로 세상과 소통하고 생성형 AI로 일상에 날개를 달다. 광주·전남·전북 및 전국 출강 문의: 010-8620-8700">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=3.1">
+</head>
+<body>
+
+  <!-- Site Header & GNB -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="다온샘 김인숙 홈으로 이동">
+        <div class="brand-logo-wrap">
+          <div class="brand-badge-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="brand-text-group">
+            <span class="brand-title">다온샘 김인숙<span class="brand-dot"></span></span>
+            <span class="brand-sub">IT &amp; 생성형 AI 전문교육</span>
+          </div>
+        </div>
+      </a>
+
+      <nav class="desktop-nav" aria-label="주요 메뉴">
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">강사 소개</a></li>
+          <li><a href="#programs" class="nav-link">교육 프로그램</a></li>
+          <li><a href="#portfolio" class="nav-link">출강 실적 &amp; 후기</a></li>
+          <li><a href="#contact" class="nav-link">강의 의뢰 &amp; 문의</a></li>
+          <li>
+            <a href="https://blog.naver.com/kis9560" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-blog" title="네이버 공식 블로그 새창 열기">
+              <span class="blog-badge-n">N</span>
+              <span>블로그 ↗</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="header-admin-btn" id="headerAdminTrigger" title="관리자 로그인 (신청 내역 관리)">
+          <span>🔒</span>
+          <span>관리자</span>
+        </button>
+
+        <a href="tel:010-8620-8700" class="phone-quick-pill" title="전화 바로 상담">
+          <span class="phone-icon-circle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+          </span>
+          <span>010-8620-8700</span>
+        </a>
+
+        <a href="#contact" class="btn-header-cta">
+          <span>강의 의뢰하기</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <button class="nav-toggle" id="menuToggle" aria-label="모바일 메뉴 열기" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu (Strictly Hidden on Desktop) -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true" style="display: none;">
+    <ul class="mobile-nav-links">
+      <li><a href="#about" class="mobile-nav-link">강사 소개</a></li>
+      <li><a href="#programs" class="mobile-nav-link">교육 프로그램</a></li>
+      <li><a href="#portfolio" class="mobile-nav-link">출강 실적 &amp; 후기</a></li>
+      <li><a href="#contact" class="mobile-nav-link">강의 의뢰 &amp; 문의</a></li>
+      <li><a href="https://blog.naver.com/kis9560" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color: #03C75A;">네이버 공식 블로그 ↗</a></li>
+      <li><a href="#" id="mobileAdminTrigger" class="mobile-nav-link" style="color: var(--trust-blue);">🔒 관리자 모드</a></li>
+    </ul>
+    <div class="mobile-menu-footer">
+      <a href="tel:010-8620-8700" class="btn btn-trust-blue" style="width: 100%; margin-bottom: 0.8rem;">전화 바로연결 (010-8620-8700)</a>
+      <a href="#contact" class="btn btn-navy" style="width: 100%;">출강 및 1:1 상담 예약</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-glow-blue"></div>
+      <div class="hero-glow-ambient"></div>
+      <div class="hero-grid-pattern"></div>
+      <div class="container hero-grid">
+        <div class="hero-content fade-in-up">
+          <div class="hero-trust-badge">
+            <span class="trust-badge-dot"></span>
+            <span class="trust-badge-text">20년 공인 IT 교육의 신뢰 • 생성형 AI &amp; 스마트폰 리더</span>
+          </div>
+
+          <h1 class="hero-title">
+            스마트폰에서<br>
+            <span class="hero-highlight-blue">생성형 AI</span>까지,<br>
+            신뢰와 배움으로 잇다
+          </h1>
+
+          <p class="hero-desc">
+            카카오톡만 하실 줄 안다면 인공지능도 3초 만에 친해질 수 있습니다. 20년 현장 경험의 노하우로 컴맹부터 시니어, 공공기관 임직원까지 실무에 바로 쓰는 맞춤형 AI·디지털 솔루션을 전합니다.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-trust-blue">
+              <span>강의 및 출강 의뢰하기</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#programs" class="btn btn-outline-blue">교육 커리큘럼 보기</a>
+            <a href="https://blog.naver.com/kis9560" target="_blank" class="btn btn-ghost-blue" title="네이버 공식 블로그 새창 열기">
+              공식 블로그 ↗
+            </a>
+          </div>
+
+          <div class="hero-stats-grid">
+            <div class="hero-stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-icon">🏆</span>
+                <span class="stat-card-num">20+<small>년</small></span>
+              </div>
+              <p class="stat-card-label">IT 전문 교육 경력</p>
+            </div>
+            <div class="hero-stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-icon">🏛️</span>
+                <span class="stat-card-num">1,500+<small>회</small></span>
+              </div>
+              <p class="stat-card-label">관공서 &amp; 기업 출강</p>
+            </div>
+            <div class="hero-stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-icon">⭐</span>
+                <span class="stat-card-num">99.4<small>%</small></span>
+              </div>
+              <p class="stat-card-label">수강생 교육 만족도</p>
+            </div>
+            <div class="hero-stat-card">
+              <div class="stat-card-top">
+                <span class="stat-card-icon">📜</span>
+                <span class="stat-card-num">100<small>%</small></span>
+              </div>
+              <p class="stat-card-label">실무 자격증 연계</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media-wrap fade-in-up">
+          <div class="profile-card-modern">
+            <div class="profile-card-glow"></div>
+            <div class="profile-frame">
+              <img src="assets/profile.jpg" alt="김인숙 강사 (다온샘) 프로필 사진" width="420" height="420" loading="eager">
+              <div class="verified-ribbon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                공인 인증 수석강사
+              </div>
+            </div>
+
+            <div class="profile-meta-box">
+              <div class="profile-name-row">
+                <h3 class="profile-name">김인숙 강사 <span class="profile-alias">(다온샘)</span></h3>
+                <span class="profile-title-tag">20년차 IT Specialist</span>
+              </div>
+              <p class="profile-role">생성형 AI 챗GPT • 스마트폰 SNS 활용 공인 지도사</p>
+              <div class="profile-quick-contact">
+                <a href="tel:010-8620-8700" class="profile-call-link">
+                  <span class="pulse-call-dot"></span>
+                  <strong>직통 전화 상담</strong> 010-8620-8700
+                </a>
+              </div>
+            </div>
+
+            <!-- Floating Badges with Trust Blue & Glass -->
+            <div class="floating-pill-card top-badge">
+              <div class="pill-card-icon blue">⚡</div>
+              <div class="pill-card-text">
+                <h6>AI 챗GPT 전문지도사</h6>
+                <p>2급 공인 자격과정 전담 지도</p>
+              </div>
+            </div>
+
+            <div class="floating-pill-card bottom-badge">
+              <div class="pill-card-icon navy">🌐</div>
+              <div class="pill-card-text">
+                <h6>광주·전남·전북 &amp; 전국</h6>
+                <p>관공서, 복지관, 맞춤형 출강</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section (강사 소개 & 교육 철학) -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="section-header center fade-in-up">
+          <span class="section-tag">Instructor Story &amp; Philosophy</span>
+          <h2 class="section-title">차분하고 알기 쉽게, 누구에게나 열린 디지털 세상</h2>
+          <p class="section-desc">
+            기술이 빠르게 변해도 두려워하실 필요 없습니다. 일상에서 바로 활용하는 가장 쉬운 방법부터 다른 사람을 가르치는 전문 강사로의 도약까지 든든하게 함께합니다.
+          </p>
+        </div>
+
+        <div class="about-grid fade-in-up">
+          <div class="about-quote-box">
+            <div class="quote-mark">“</div>
+            <blockquote>
+              "스마트폰 하나로 세상과 소통하고, 인공지능과 친구가 되는 시대! 배움의 즐거움이 나눔의 보람으로 이어질 때 가장 큰 감동이 시작됩니다."
+            </blockquote>
+            <p>
+              20년간 현장에서 수많은 어르신, 주부, 소상공인, 직장인분들을 만나왔습니다. 복잡하고 어려운 IT 이론 대신 당장 내 삶의 질을 높이고 업무 시간을 절반으로 줄여주는 실전 팁을 차근차근 전해드립니다.
+            </p>
+          </div>
+
+          <div class="credentials-list">
+            <div class="credential-item">
+              <span class="icon">✓</span>
+              <span>(주)디지털콘텐츠그룹 광주북구지국장</span>
+            </div>
+            <div class="credential-item">
+              <span class="icon">✓</span>
+              <span>SNS소통연구소 광주북구지국장</span>
+            </div>
+            <div class="credential-item">
+              <span class="icon">✓</span>
+              <span>AI 챗GPT 전문지도사 2급 공인 자격과정 전담 강사</span>
+            </div>
+            <div class="credential-item">
+              <span class="icon">✓</span>
+              <span>스마트폰활용지도사 1급 / 디지털 공쌤 양성과정 수석 지도</span>
+            </div>
+            <div class="credential-item">
+              <span class="icon">✓</span>
+              <span>소상공인 SNS 블로그 마케팅 &amp; 유튜브 영상 크리에이터</span>
+            </div>
+            <div class="credential-item">
+              <span class="icon">✓</span>
+              <span>국제공인 아로마테라피스트 (디지털 힐링 워크숍 융합)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Pillars Grid -->
+        <div class="pillars-grid">
+          <div class="pillar-card fade-in-up">
+            <span class="pillar-num">01 / EMPATHY</span>
+            <h4 class="pillar-title">눈높이 맞춤 소통</h4>
+            <p class="pillar-desc">어려운 전문용어 없이, 스마트폰이나 컴퓨터가 낯선 분들도 3초 만에 이해하고 따라 하실 수 있도록 쉽고 친절하게 지도합니다.</p>
+          </div>
+
+          <div class="pillar-card fade-in-up">
+            <span class="pillar-num">02 / PRACTICAL</span>
+            <h4 class="pillar-title">실무형 자격 연계</h4>
+            <p class="pillar-desc">단순 수강으로 끝나지 않고 공인 민간자격증 취득 및 포트폴리오 완성을 통해 강사 데뷔와 취업 역량을 강화합니다.</p>
+          </div>
+
+          <div class="pillar-card fade-in-up">
+            <span class="pillar-num">03 / SHARING</span>
+            <h4 class="pillar-title">배움에서 나눔으로</h4>
+            <p class="pillar-desc">광산공유센터 '디지털 공쌤'처럼 내가 배운 IT 지식으로 이웃과 지역사회에 재능 나눔을 실천하는 선순환을 만듭니다.</p>
+          </div>
+
+          <div class="pillar-card fade-in-up">
+            <span class="pillar-num">04 / HEALING</span>
+            <h4 class="pillar-title">디지털 &amp; 힐링 융합</h4>
+            <p class="pillar-desc">천연 아로마테라피를 결합하여 디지털 피로도를 낮추고, 뇌와 마음을 편안하게 이완시키는 차별화된 웰니스 특강을 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Educational Programs Section (#programs) -->
+    <section class="programs" id="programs">
+      <div class="container">
+        <div class="section-header center fade-in-up">
+          <span class="section-tag">Curriculum &amp; Services</span>
+          <h2 class="section-title">목적에 맞게 설계된 4대 핵심 교육 프로그램</h2>
+          <p class="section-desc">
+            기관, 기업, 단체 워크숍부터 1:1 개인 코칭까지 최적의 맞춤형 커리큘럼을 제공합니다.
+          </p>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="program-filter-bar fade-in-up">
+          <button class="filter-pill active" data-filter="all">전체 커리큘럼</button>
+          <button class="filter-pill" data-filter="ai">생성형 AI &amp; 챗GPT</button>
+          <button class="filter-pill" data-filter="smartphone">스마트폰 &amp; 디지털 리터러시</button>
+          <button class="filter-pill" data-filter="marketing">SNS 마케팅 &amp; 유튜브</button>
+          <button class="filter-pill" data-filter="healing">기관 워크숍 &amp; 힐링</button>
+        </div>
+
+        <!-- Program Cards Grid -->
+        <div class="programs-grid" id="programGrid">
+
+          <!-- Program 1: AI 챗GPT -->
+          <article class="program-card fade-in-up" data-category="ai">
+            <div class="program-meta">
+              <span class="program-badge">인기 자격과정</span>
+              <span class="program-duration">총 12시간 (단기 3일 집중반)</span>
+            </div>
+            <h3 class="program-title">'AI 챗GPT 전문지도사 2급' 자격과정</h3>
+            <p class="program-desc">
+              ChatGPT, 생성형 AI의 기본 원리부터 업무를 10배 빠르게 돕는 고품질 프롬프트 엔지니어링, 나만의 맞춤형 비서 Gems 제작까지 마스터합니다.
+            </p>
+            <ul class="curriculum-highlights">
+              <li>프롬프트 속 특수기호(###, [ ])와 명확한 지시문 구조화</li>
+              <li>맞춤형 지시사항(Custom Instructions) 및 Gems AI 비서 구축</li>
+              <li>보고서, 제안서, 기획서 자동 작성 및 이미지 생성 실무</li>
+              <li>다올플러스 사회적협동조합 연계 공인 민간자격증 취득</li>
+            </ul>
+            <div class="program-footer">
+              <button class="btn-detail" data-program="ai">상세 커리큘럼 보기 →</button>
+              <a href="#contact" class="btn btn-navy" style="padding: 0.55rem 1.2rem; font-size: 0.85rem;">출강/수강 신청</a>
+            </div>
+          </article>
+
+          <!-- Program 2: 스마트폰 지도사 -->
+          <article class="program-card fade-in-up" data-category="smartphone">
+            <div class="program-meta">
+              <span class="program-badge">강사 양성과정</span>
+              <span class="program-duration">12주 완성 / 단기 특강 조율 가능</span>
+            </div>
+            <h3 class="program-title">스마트폰활용지도사 &amp; 디지털 공쌤 양성</h3>
+            <p class="program-desc">
+              스마트폰의 숨은 200% 기능부터 모바일 행정, 금융, 생활 편의 앱 완벽 정복! 배운 지식을 바탕으로 지역사회 디지털 강사로 데뷔하도록 돕습니다.
+            </p>
+            <ul class="curriculum-highlights">
+              <li>광산공유센터 '디지털 공쌤' 12주 표준 커리큘럼 기반</li>
+              <li>브라우저 캐시·쿠키 3초 정리 등 기기 최적화 및 속도 향상</li>
+              <li>카카오톡 고급 기능, 지도 내비, 모바일 신분증·교통 앱 마스터</li>
+              <li>스마트폰활용지도사 자격증 취득 및 모의 강의 피드백</li>
+            </ul>
+            <div class="program-footer">
+              <button class="btn-detail" data-program="smartphone">상세 커리큘럼 보기 →</button>
+              <a href="#contact" class="btn btn-navy" style="padding: 0.55rem 1.2rem; font-size: 0.85rem;">출강/수강 신청</a>
+            </div>
+          </article>
+
+          <!-- Program 3: SNS 마케팅 -->
+          <article class="program-card fade-in-up" data-category="marketing">
+            <div class="program-meta">
+              <span class="program-badge">소상공인·1인기업</span>
+              <span class="program-duration">4주~8주 실전 코칭</span>
+            </div>
+            <h3 class="program-title">소상공인 SNS 블로그 마케팅 &amp; 유튜브 크리에이터</h3>
+            <p class="program-desc">
+              내 사업장과 상품을 알리는 네이버 블로그 스마트 검색 노출(SEO) 비법과 스마트폰 하나로 뚝딱 만드는 유튜브 숏폼·릴스 영상 제작 실습입니다.
+            </p>
+            <ul class="curriculum-highlights">
+              <li>네이버 블로그 알고리즘 기반 키워드 추출 및 상위 노출 글쓰기</li>
+              <li>스마트폰 캡컷(CapCut)을 활용한 1분 숏폼 영상 기획·편집</li>
+              <li>인스타그램 비즈니스 계정 운영 및 잠재고객 소통 전략</li>
+              <li>1인 기업 및 소상공인 매출 증대 1:1 맞춤형 컨설팅</li>
+            </ul>
+            <div class="program-footer">
+              <button class="btn-detail" data-program="marketing">상세 커리큘럼 보기 →</button>
+              <a href="#contact" class="btn btn-navy" style="padding: 0.55rem 1.2rem; font-size: 0.85rem;">출강/수강 신청</a>
+            </div>
+          </article>
+
+          <!-- Program 4: 워크숍 & 힐링 -->
+          <article class="program-card fade-in-up" data-category="healing">
+            <div class="program-meta">
+              <span class="program-badge">관공서·기업 특강</span>
+              <span class="program-duration">2시간~1일 워크숍</span>
+            </div>
+            <h3 class="program-title">관공서·기업 맞춤 출강 &amp; 아로마 힐링 워크숍</h3>
+            <p class="program-desc">
+              스마트워크 실무 역량 강화와 함께, 과중한 업무로 인한 디지털 번아웃을 천연 에센셜 오일과 아로마테라피로 치유하는 융합 워크숍입니다.
+            </p>
+            <ul class="curriculum-highlights">
+              <li>공공기관 및 공무원 대상 업무 효율화 생성형 AI 특강</li>
+              <li>농어촌 지역주민 맞춤형 찾아가는 스마트폰 사랑방 교육</li>
+              <li>천연 식물성 에센셜 오일을 활용한 나만의 롤온/디퓨저 블렌딩</li>
+              <li>스트레스 완화, 뇌 피로 회복 및 팀 빌딩 소통 프로그램</li>
+            </ul>
+            <div class="program-footer">
+              <button class="btn-detail" data-program="healing">상세 커리큘럼 보기 →</button>
+              <a href="#contact" class="btn btn-navy" style="padding: 0.55rem 1.2rem; font-size: 0.85rem;">출강/수강 신청</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio & Reviews Section (#portfolio) -->
+    <section class="history-reviews" id="portfolio">
+      <div class="container">
+        <div class="history-reviews-grid">
+          <!-- Left: Timeline -->
+          <div class="timeline-column fade-in-up">
+            <span class="section-tag">Track Record</span>
+            <h2 class="section-title">신뢰로 검증된 주요 출강 및 활동 연혁</h2>
+            <p class="section-desc">
+              광주광역시와 전남·전북 관공서, 복지관, 지원센터 및 다양한 단체에서 검증된 교육을 진행해 왔습니다.
+            </p>
+
+            <div class="timeline-wrap">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-org">광산공유센터 • 재능나눔 프로젝트</div>
+                <h4 class="timeline-title">디지털 공쌤 양성과정 12주 전담 지도</h4>
+                <p class="timeline-desc">
+                  스마트폰과 인공지능을 배워 이웃에게 나눔을 실천하는 예비 디지털 강사진을 12주간 성공적으로 육성·수료.
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-org">다올플러스 사회적협동조합 • 소촌아트팩토리</div>
+                <h4 class="timeline-title">AI 챗GPT 전문지도사 2급 자격과정</h4>
+                <p class="timeline-desc">
+                  생성형 AI 실무 프롬프트와 맞춤형 업무 비서 제작을 전수하여 수강생 전원 자격증 취득 및 강사 역량 배양.
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-org">영광군 농촌협약지원센터 • 홍농읍 주민교육</div>
+                <h4 class="timeline-title">스마트한 일상을 위한 농촌 AI·스마트폰 교육</h4>
+                <p class="timeline-desc">
+                  어르신과 지역 주민들이 스마트폰 안에 똑똑한 비서를 둘 수 있도록 찾아가는 맞춤형 실습 특강 진행.
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-org">각 지자체 및 도서관 • 복지관 워크숍</div>
+                <h4 class="timeline-title">스마트폰 SNS 마케팅 &amp; 아로마테라피 융합 특강</h4>
+                <p class="timeline-desc">
+                  소상공인 판로 개척을 위한 블로그 마케팅 실무 및 힐링 아로마테라피 강좌를 지속적으로 출강 중.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Real Student Reviews -->
+          <div class="reviews-column fade-in-up">
+            <span class="section-tag">Student Stories</span>
+            <h2 class="section-title">수강생들이 직접 전하는 감동의 후기</h2>
+            <p class="section-desc">
+              배움의 기쁨을 느끼고 새로운 기회를 얻은 수강생들의 진솔한 목소리입니다.
+            </p>
+
+            <div class="reviews-container">
+              <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">
+                  "‘내가 강사가 될 수 있을까?’ 망설였는데, 김인숙 강사님의 따뜻한 격려와 꼼꼼한 지도 덕분에 12주 과정을 마치고 어엿한 디지털 강사로 첫걸음을 뗐습니다. 인생의 터닝포인트가 되었습니다!"
+                </p>
+                <div class="review-author">
+                  <div class="author-info">
+                    <h6>박*옥 수강생</h6>
+                    <p>광산공유센터 디지털 공쌤 1기 수료생</p>
+                  </div>
+                  <span class="badge-tag">디지털 강사 배출</span>
+                </div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">
+                  "ChatGPT를 어디에 써야 할지 막막했는데, 3일 동안 프롬프트 작성법부터 Gems AI 설정까지 배우고 나니 매일 작성하던 보고서 작성 시간이 1/3로 줄었습니다. 50대인 저도 쉽게 따라 할 수 있었어요."
+                </p>
+                <div class="review-author">
+                  <div class="author-info">
+                    <h6>이*훈 수강생</h6>
+                    <p>사회적기업 대표 / 자격과정 수료</p>
+                  </div>
+                  <span class="badge-tag">AI지도사 2급 합격</span>
+                </div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-quote">
+                  "마을 어르신들이 스마트폰을 어려워하셔서 걱정했는데, 강사님이 눈높이에 맞춰 한 분 한 분 손을 잡고 친절하게 알려주셔서 다들 너무 좋아하셨습니다. 다음에도 꼭 다시 모시고 싶습니다."
+                </p>
+                <div class="review-author">
+                  <div class="author-info">
+                    <h6>최*영 주무관</h6>
+                    <p>영광군 주민지원센터 교육 담당자</p>
+                  </div>
+                  <span class="badge-tag">관공서 출강 후기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Lecture Request Section (#contact) -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Left: Quick Contact Info -->
+          <div class="contact-info-col fade-in-up">
+            <span class="section-tag">Direct Inquiry</span>
+            <h2 class="section-title">출강 의뢰 및 개인 코칭 문의</h2>
+            <p class="section-desc">
+              기관 및 기업의 일정, 대상, 예산에 맞춰 최적화된 강의를 제안해 드립니다. 전화 또는 폼으로 편하게 문의주시면 친절히 상담해 드립니다.
+            </p>
+
+            <div class="contact-quick-cards">
+              <a href="tel:010-8620-8700" class="contact-card-call" title="전화 상담 바로연결">
+                <div class="call-icon">📞</div>
+                <div>
+                  <h5>가장 빠른 전화 상담</h5>
+                  <div class="phone-num">010-8620-8700</div>
+                  <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">강의 중일 경우 문자를 남겨주시면 확인 후 즉시 연락드립니다.</p>
+                </div>
+              </a>
+            </div>
+
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <div class="icon">💬</div>
+                <div>
+                  <h6>문자 &amp; 카카오톡 상담</h6>
+                  <p>010-8620-8700 (희망 교육 주제 및 일정을 남겨주세요)</p>
+                </div>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="icon">🏢</div>
+                <div>
+                  <h6>연구소 및 지국 안내</h6>
+                  <p>(주)디지털콘텐츠그룹 광주북구지국 / SNS소통연구소 광주지국</p>
+                </div>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="icon">🗺️</div>
+                <div>
+                  <h6>출강 가능 지역</h6>
+                  <p>광주광역시, 전라남도, 전라북도 전역 및 전국 지자체·기관 온/오프라인 출강</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Inquiry Form -->
+          <div class="contact-form-col fade-in-up">
+            <form id="inquiryForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="clientName" class="form-label">의뢰인 성함 / 담당자명 *</label>
+                  <input type="text" id="clientName" class="form-control" placeholder="홍길동" required>
+                </div>
+                <div class="form-group">
+                  <label for="clientPhone" class="form-label">연락처 *</label>
+                  <input type="tel" id="clientPhone" class="form-control" placeholder="010-0000-0000" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="orgName" class="form-label">소속 기관명 / 기업명</label>
+                  <input type="text" id="orgName" class="form-control" placeholder="○○구청 / ○○복지관 / 개인">
+                </div>
+                <div class="form-group">
+                  <label for="courseSelect" class="form-label">희망 교육 분야 *</label>
+                  <select id="courseSelect" class="form-control" required>
+                    <option value="ai">AI 챗GPT 전문지도사 자격과정</option>
+                    <option value="smartphone">스마트폰 활용 및 디지털 공쌤 양성</option>
+                    <option value="marketing">SNS 블로그 마케팅 &amp; 유튜브 영상</option>
+                    <option value="healing">관공서/기업 워크숍 &amp; 아로마 힐링</option>
+                    <option value="custom">맞춤형 1:1 개인 코칭 및 기타 컨설팅</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="lectureDate" class="form-label">희망 교육 일정 (대략)</label>
+                  <input type="text" id="lectureDate" class="form-control" placeholder="예: 10월 중순 평일 오전">
+                </div>
+                <div class="form-group">
+                  <label for="audienceInfo" class="form-label">예상 교육 인원 및 대상</label>
+                  <input type="text" id="audienceInfo" class="form-control" placeholder="예: 시니어 주민 20명 / 임직원 15명">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="messageContent" class="form-label">상세 문의 내용 및 요청 사항 *</label>
+                <textarea id="messageContent" class="form-control" placeholder="교육 장소, 시간, 중점적으로 다루고 싶은 주제 등을 자유롭게 작성해 주세요." required></textarea>
+              </div>
+
+              <div class="checkbox-wrap">
+                <input type="checkbox" id="privacyAgree" required>
+                <label for="privacyAgree">상담 및 강의 안내를 위한 연락처 수집에 동의합니다.</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="formSubmitBtn" style="width: 100%;">
+                <span>강의 의뢰 및 상담 신청하기</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>다온샘 김인숙 강사</h3>
+          <p>
+            배움에서 나눔으로! 20년 경력의 전문성과 따뜻한 진심으로 모든 세대를 아우르는 스마트폰·생성형 AI 전문 교육을 선도합니다.
+          </p>
+          <a href="https://blog.naver.com/kis9560" target="_blank" class="naver-blog-card" title="네이버 공식 블로그 새창 이동">
+            <div class="naver-icon">N</div>
+            <div>
+              <div style="font-size: 0.78rem; color: #A5B2BD;">공식 네이버 블로그</div>
+              <div style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF;">스마트폰SNS활용 광주전남전북</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="footer-col">
+          <h5>QUICK LINKS</h5>
+          <ul class="footer-links">
+            <li><a href="#about">강사 프로필 &amp; 철학</a></li>
+            <li><a href="#programs">4대 교육 커리큘럼</a></li>
+            <li><a href="#portfolio">출강 이력 &amp; 수강 후기</a></li>
+            <li><a href="#contact">출강 의뢰 신청</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>CURRICULUM</h5>
+          <ul class="footer-links">
+            <li><a href="#programs">AI 챗GPT 전문지도사 2급</a></li>
+            <li><a href="#programs">스마트폰활용지도사 1급</a></li>
+            <li><a href="#programs">광산공유센터 디지털 공쌤</a></li>
+            <li><a href="#programs">아로마테라피 힐링 특강</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>CONTACT US</h5>
+          <p style="font-size: 0.9rem; color: #FFFFFF; font-weight: 700; margin-bottom: 0.5rem;">
+            ☎ 010-8620-8700
+          </p>
+          <p style="font-size: 0.85rem; color: #A5B2BD; line-height: 1.6;">
+            강의 &amp; 개인 코칭 및 관공서·기업 출강 문의 언제나 환영합니다.
+          </p>
+          <div style="margin-top: 1rem;">
+            <a href="tel:010-8620-8700" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.84rem;">
+              지금 바로 통화하기
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 다온샘 김인숙 (디지털콘텐츠그룹 광주북구지국 / SNS소통연구소). All rights reserved.</div>
+        <div style="display: flex; align-items: center; gap: 1.2rem;">
+          <span>Inspiring Digital Literacy &amp; AI Empowerment</span>
+          <button type="button" id="adminLoginTriggerBtn" class="admin-trigger-btn">🔒 관리자 모드</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Curriculum Detail Modal -->
+  <div class="modal-backdrop" id="curriculumModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="닫기">✕</button>
+      <div class="modal-category" id="modalCategory">생성형 AI &amp; 챗GPT</div>
+      <h3 class="modal-title" id="modalTitle">교육 과정 제목</h3>
+      <span class="modal-target" id="modalTarget">교육 대상: 예비 강사, 직장인, 소상공인</span>
+
+      <p id="modalDesc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.6rem;">
+        과정에 대한 상세 설명이 표시됩니다.
+      </p>
+
+      <table class="curriculum-table" id="curriculumTable">
+        <!-- Dynamically rendered -->
+      </table>
+
+      <button class="btn btn-primary" id="modalApplyBtn" style="width: 100%;">
+        이 과정으로 강의 의뢰하기
+      </button>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div class="modal-backdrop" id="adminLoginModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content admin-login-content">
+      <button class="modal-close-btn" id="adminLoginCloseBtn" aria-label="닫기">✕</button>
+      <div style="text-align: center; margin-bottom: 1.8rem;">
+        <div class="admin-lock-icon">🔒</div>
+        <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--accent-navy); margin-top: 0.5rem;">관리자 로그인</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.2rem;">김인숙 강사 및 운영자 전용 신청 관리 시스템</p>
+      </div>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label for="adminId" class="form-label">관리자 아이디</label>
+          <input type="text" id="adminId" class="form-control" placeholder="아이디 입력 (기본: admin)" required>
+        </div>
+        <div class="form-group">
+          <label for="adminPw" class="form-label">비밀번호</label>
+          <input type="password" id="adminPw" class="form-control" placeholder="비밀번호 입력 (기본: daon2026!)" required>
+        </div>
+
+        <div id="loginErrorMsg" class="admin-error-msg" style="display: none;">
+          아이디 또는 비밀번호가 일치하지 않습니다.
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.8rem;">
+          대시보드 로그인
+        </button>
+
+        <div style="text-align: center; margin-top: 1.2rem; font-size: 0.8rem; color: var(--text-muted); background: var(--bg-secondary); padding: 0.6rem; border-radius: var(--radius-sm);">
+          테스트 기본 계정: <strong>admin</strong> / <strong>daon2026!</strong>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Modal (신청 내역 관리 대시보드) -->
+  <div class="modal-backdrop" id="adminDashboardModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content admin-dashboard-content">
+      <div class="admin-dash-header">
+        <div>
+          <span class="admin-dash-badge">ADMIN DASHBOARD</span>
+          <h3 class="admin-dash-title">강의 의뢰 신청 내역 관리</h3>
+        </div>
+        <div class="admin-dash-actions">
+          <button type="button" class="btn btn-outline" id="exportCsvBtn" title="엑셀 호환 CSV 파일로 다운로드">
+            📥 엑셀(CSV) 저장
+          </button>
+          <button type="button" class="btn btn-secondary" id="adminLogoutBtn">
+            로그아웃
+          </button>
+          <button class="modal-close-btn" id="adminDashboardCloseBtn" aria-label="닫기">✕</button>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="admin-stats-row">
+        <div class="admin-stat-card">
+          <div class="stat-label">총 의뢰 접수</div>
+          <div class="stat-num" id="statTotalCount">0</div>
+        </div>
+        <div class="admin-stat-card pending">
+          <div class="stat-label">상담 대기중</div>
+          <div class="stat-num" id="statPendingCount">0</div>
+        </div>
+        <div class="admin-stat-card completed">
+          <div class="stat-label">상담 및 조율 완료</div>
+          <div class="stat-num" id="statCompletedCount">0</div>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="admin-filter-bar">
+        <div class="admin-tabs">
+          <button type="button" class="admin-tab active" data-status="all">전체 내역 (<span id="tabCountAll">0</span>)</button>
+          <button type="button" class="admin-tab" data-status="pending">상담 대기 (<span id="tabCountPending">0</span>)</button>
+          <button type="button" class="admin-tab" data-status="completed">완료 건 (<span id="tabCountCompleted">0</span>)</button>
+        </div>
+        <div style="font-size: 0.82rem; color: var(--text-muted);">
+          * 접수된 데이터는 브라우저(localStorage)에 안전하게 보관됩니다.
+        </div>
+      </div>
+
+      <!-- Inquiry List Container -->
+      <div class="admin-inquiry-list" id="adminInquiryList">
+        <!-- Dynamically rendered items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JavaScript Application -->
+  <script src="app.js"></script>
+</body>
+</html>
