@@ -215,18 +215,25 @@ button {
 
 .brand-logo {
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
 }
 
 .brand-logo-wrap {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
 }
 
 .brand-badge-icon {
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 11px;
   background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%);
   color: #FFFFFF;
@@ -235,6 +242,7 @@ button {
   justify-content: center;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  flex-shrink: 0 !important;
 }
 
 .brand-logo:hover .brand-badge-icon {
@@ -245,6 +253,8 @@ button {
 .brand-text-group {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
 }
 
 .brand-title {
@@ -256,6 +266,8 @@ button {
   align-items: center;
   gap: 0.35rem;
   line-height: 1.25;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .brand-dot {
@@ -265,6 +277,7 @@ button {
   border-radius: 50%;
   display: inline-block;
   box-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
+  flex-shrink: 0 !important;
 }
 
 .brand-sub {
@@ -272,6 +285,8 @@ button {
   color: #64748B;
   font-weight: 600;
   letter-spacing: 0.04em;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 /* Sophisticated Pill Navigation Bar */
@@ -2275,6 +2290,40 @@ textarea.form-control {
 @media (max-width: 768px) {
   .phone-quick-pill {
     display: none !important;
+  }
+
+  .header-admin-btn {
+    display: none !important;
+  }
+
+  .brand-logo-wrap {
+    gap: 0.5rem;
+  }
+
+  .brand-badge-icon {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
+    border-radius: 9px;
+  }
+
+  .brand-title {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .brand-sub {
+    font-size: 0.65rem;
+  }
+
+  .btn-header-cta {
+    padding: 0.44rem 0.95rem;
+    font-size: 0.8rem;
+  }
+
+  .nav-actions {
+    gap: 0.45rem;
   }
 
   .hero-stats-grid {
