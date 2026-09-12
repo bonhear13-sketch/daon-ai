@@ -28,9 +28,10 @@
 
 이 웹사이트는 순수 정적 웹 기술(HTML5, CSS3, Vanilla JS)로 제작되어 **GitHub Pages**를 통해 24시간 365일 무중단 무료 호스팅이 가능합니다.
 
-### 배포 설정 방법
-1. GitHub 저장소(Repository) 상단 **[Settings]** 클릭
-2. 좌측 메뉴 **[Pages]** 클릭
-3. **Build and deployment** > **Source**: `Deploy from a branch` 선택
-4. **Branch**: `main` 브랜치 / `/ (root)` 폴더 선택 후 **[Save]**
-5. 약 1분 후 제공되는 `https://<아이디>.github.io/<저장소이름>/` 주소로 24시간 접속 가능!
+### 배포 설정 방법 (10초 소요)
+1. **[Pages 설정 페이지 바로가기](https://github.com/bonhear13-sketch/daon-ai/settings/pages)** 접속
+2. **Build and deployment** > **Source**: `Deploy from a branch` 선택
+3. **Branch**: `main` 브랜치 / `/ (root)` 폴더 선택 후 **[Save]** 클릭
+4. 약 1분 후 공식 웹사이트 주소로 24시간 언제든 접속 가능:
+   👉 **https://bonhear13-sketch.github.io/daon-ai/**
+
