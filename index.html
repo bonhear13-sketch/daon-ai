@@ -722,11 +722,11 @@
       <form id="adminLoginForm">
         <div class="form-group">
           <label for="adminId" class="form-label">관리자 아이디</label>
-          <input type="text" id="adminId" class="form-control" placeholder="아이디 입력 (기본: admin)" required>
+          <input type="text" id="adminId" class="form-control" placeholder="아이디 입력 (daonsam)" required>
         </div>
         <div class="form-group">
           <label for="adminPw" class="form-label">비밀번호</label>
-          <input type="password" id="adminPw" class="form-control" placeholder="비밀번호 입력 (기본: daon2026!)" required>
+          <input type="password" id="adminPw" class="form-control" placeholder="비밀번호 입력" required>
         </div>
 
         <div id="loginErrorMsg" class="admin-error-msg" style="display: none;">
@@ -738,7 +738,7 @@
         </button>
 
         <div style="text-align: center; margin-top: 1.2rem; font-size: 0.8rem; color: var(--text-muted); background: var(--bg-secondary); padding: 0.6rem; border-radius: var(--radius-sm);">
-          테스트 기본 계정: <strong>admin</strong> / <strong>daon2026!</strong>
+          운영자 전용 인증 시스템: <strong>daonsam</strong>
         </div>
       </form>
     </div>
@@ -802,6 +802,6 @@
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
   <!-- JavaScript Application -->
-  <script src="app.js"></script>
+  <script src="app.js?v=2.1"></script>
 </body>
 </html>

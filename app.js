@@ -372,8 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   const ADMIN_SESSION_KEY = 'daon_admin_logged_in';
   const ADMIN_CREDENTIALS = {
-    id: 'admin',
-    pw: 'daon2026!'
+    id: 'daonsam',
+    pw: '529824'
   };
 
   const isAdminLoggedIn = () => {
