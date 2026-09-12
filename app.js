@@ -256,50 +256,38 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ==========================================================================
-  // 5. Inquiries Store (localStorage Persistence)
+  // 5. Inquiries Store & Trash Bin (localStorage Persistence)
   // ==========================================================================
   const INQUIRIES_STORAGE_KEY = 'daon_inquiries_db';
+  const TRASH_STORAGE_KEY = 'daon_trash_inquiries_db';
 
-  const defaultSampleInquiries = [
-    {
-      id: 'inq-1726050000001',
-      clientName: '박미숙 주무관',
-      clientPhone: '010-3344-5566',
-      orgName: '광주광역시 동구청 주민자치과',
-      courseKey: 'ai',
-      courseTitle: 'AI 챗GPT 전문지도사 자격과정',
-      lectureDate: '10월 둘째 주 평일 오후 (협의 가능)',
-      audienceInfo: '구청 공무원 및 주민 리더 25명',
-      messageContent: '구청 대회의실에서 3일 단기 집중 과정으로 챗GPT 프롬프트 엔지니어링 및 2급 자격증 취득 연계 특강 진행을 희망합니다. 견적서 및 커리큘럼 공문 요청드립니다.',
-      createdAt: '2026-09-11 14:35',
-      status: 'pending' // 'pending' or 'completed'
-    },
-    {
-      id: 'inq-1726050000002',
-      clientName: '김성수 이사장',
-      clientPhone: '010-7788-9900',
-      orgName: '빛고을 마을사회적협동조합',
-      courseKey: 'smartphone',
-      courseTitle: '스마트폰 활용 및 디지털 공쌤 양성',
-      lectureDate: '11월 초 시작 (주 1회, 총 8회차)',
-      audienceInfo: '조합원 및 마을 시니어 15명',
-      messageContent: '광산공유센터 공쌤 과정 소식을 블로그에서 보았습니다. 우리 조합에서도 주민들이 스스로 스마트폰을 배워 재능 나눔을 할 수 있는 강사 양성 커리큘럼 출강을 의뢰합니다.',
-      createdAt: '2026-09-08 10:20',
-      status: 'completed'
-    }
-  ];
+  // Helper to format full timestamp with Year, Month, Day, Hour, Minute, Second
+  const getFullFormattedDate = (date = new Date()) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const hours = String(d.getHours()).padStart(2, '0');
+    const minutes = String(d.getMinutes()).padStart(2, '0');
+    const seconds = String(d.getSeconds()).padStart(2, '0');
+    return `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분 ${seconds}초`;
+  };
 
   const getStoredInquiries = () => {
     try {
       const data = localStorage.getItem(INQUIRIES_STORAGE_KEY);
-      if (!data) {
-        localStorage.setItem(INQUIRIES_STORAGE_KEY, JSON.stringify(defaultSampleInquiries));
-        return defaultSampleInquiries;
+      if (!data) return [];
+      const parsed = JSON.parse(data);
+      if (!Array.isArray(parsed)) return [];
+      // Remove any legacy sample data
+      const realOnly = parsed.filter(item => item && !String(item.id).startsWith('inq-172605000000'));
+      if (realOnly.length !== parsed.length) {
+        localStorage.setItem(INQUIRIES_STORAGE_KEY, JSON.stringify(realOnly));
       }
-      return JSON.parse(data);
+      return realOnly;
     } catch (e) {
       console.error('Failed to parse inquiries from localStorage', e);
-      return defaultSampleInquiries;
+      return [];
     }
   };
 
@@ -308,6 +296,28 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem(INQUIRIES_STORAGE_KEY, JSON.stringify(inquiries));
     } catch (e) {
       console.error('Failed to save inquiries to localStorage', e);
+    }
+  };
+
+  const getTrashInquiries = () => {
+    try {
+      const data = localStorage.getItem(TRASH_STORAGE_KEY);
+      if (!data) return [];
+      const parsed = JSON.parse(data);
+      if (!Array.isArray(parsed)) return [];
+      const realOnly = parsed.filter(item => item && !String(item.id).startsWith('inq-172605000000'));
+      return realOnly;
+    } catch (e) {
+      console.error('Failed to parse trash from localStorage', e);
+      return [];
+    }
+  };
+
+  const saveTrashInquiries = (trashList) => {
+    try {
+      localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(trashList));
+    } catch (e) {
+      console.error('Failed to save trash to localStorage', e);
     }
   };
 
@@ -321,36 +331,37 @@ document.addEventListener('DOMContentLoaded', () => {
     inquiryForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const clientName = document.getElementById('clientName').value.trim();
-      const clientPhone = document.getElementById('clientPhone').value.trim();
-      const orgName = document.getElementById('orgName').value.trim() || '개인 의뢰';
+      const clientName = (document.getElementById('clientName')?.value || '').trim();
+      const clientPhone = (document.getElementById('clientPhone')?.value || '').trim();
+      const clientEmail = (document.getElementById('clientEmail')?.value || '').trim();
+      const orgName = (document.getElementById('orgName')?.value || '').trim() || '개인 의뢰';
       const courseSelect = document.getElementById('courseSelect');
-      const courseKey = courseSelect.value;
-      const courseTitle = courseSelect.options[courseSelect.selectedIndex].text;
-      const lectureDate = document.getElementById('lectureDate').value.trim() || '협의 필요';
-      const audienceInfo = document.getElementById('audienceInfo').value.trim() || '미정';
-      const messageContent = document.getElementById('messageContent').value.trim();
+      const courseKey = courseSelect ? courseSelect.value : 'ai';
+      const courseTitle = courseSelect ? courseSelect.options[courseSelect.selectedIndex].text : '교육 과정';
+      const lectureDate = (document.getElementById('lectureDate')?.value || '').trim() || '협의 필요';
+      const audienceInfo = (document.getElementById('audienceInfo')?.value || '').trim() || '미정';
+      const messageContent = (document.getElementById('messageContent')?.value || '').trim();
 
-      if (!clientName || !clientPhone || !messageContent) {
-        showToast('필수 입력 사항을 모두 작성해 주세요.', '!');
+      if (!clientName || !clientPhone || !clientEmail || !messageContent) {
+        showToast('성함, 연락처, 이메일, 문의 내용을 모두 작성해 주세요.', '!');
         return;
       }
 
-      // Format current timestamp (YYYY-MM-DD HH:mm)
-      const now = new Date();
-      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      // Format current timestamp with exact Year, Month, Day, Hour, Minute, and Second
+      const exactCreatedAt = getFullFormattedDate();
 
       const newInquiry = {
         id: 'inq-' + Date.now(),
         clientName,
         clientPhone,
+        clientEmail,
         orgName,
         courseKey,
         courseTitle,
         lectureDate,
         audienceInfo,
         messageContent,
-        createdAt: dateStr,
+        createdAt: exactCreatedAt,
         status: 'pending'
       };
 
@@ -374,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (adminDashboardModal && adminDashboardModal.classList.contains('active')) {
           renderAdminDashboard();
         }
-      }, 700);
+      }, 600);
     });
   }
 
@@ -499,49 +510,160 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 8. Admin Dashboard Rendering & Operations
+  // 8. Admin Dashboard Rendering & Operations (Real inquiries + Trash Bin)
   // ==========================================================================
-  let currentAdminFilter = 'all'; // 'all', 'pending', 'completed'
+  let currentAdminFilter = 'all'; // 'all', 'pending', 'completed', 'trash'
 
   const renderAdminDashboard = () => {
     const inquiries = getStoredInquiries();
+    const trashList = getTrashInquiries();
 
     // Counts
     const totalCount = inquiries.length;
     const pendingCount = inquiries.filter(i => i.status === 'pending').length;
     const completedCount = inquiries.filter(i => i.status === 'completed').length;
+    const trashCount = trashList.length;
 
-    // Update Stat Badges
+    // Update Stat Badges & Tab Counts
     const statTotalCount = document.getElementById('statTotalCount');
     const statPendingCount = document.getElementById('statPendingCount');
     const statCompletedCount = document.getElementById('statCompletedCount');
+    const statTrashCount = document.getElementById('statTrashCount');
     const tabCountAll = document.getElementById('tabCountAll');
     const tabCountPending = document.getElementById('tabCountPending');
     const tabCountCompleted = document.getElementById('tabCountCompleted');
+    const tabCountTrash = document.getElementById('tabCountTrash');
+    const emptyTrashBtn = document.getElementById('emptyTrashBtn');
 
     if (statTotalCount) statTotalCount.textContent = totalCount;
     if (statPendingCount) statPendingCount.textContent = pendingCount;
     if (statCompletedCount) statCompletedCount.textContent = completedCount;
+    if (statTrashCount) statTrashCount.textContent = trashCount;
     if (tabCountAll) tabCountAll.textContent = totalCount;
     if (tabCountPending) tabCountPending.textContent = pendingCount;
     if (tabCountCompleted) tabCountCompleted.textContent = completedCount;
+    if (tabCountTrash) tabCountTrash.textContent = trashCount;
 
-    // Filter List
+    if (emptyTrashBtn) {
+      emptyTrashBtn.style.display = (currentAdminFilter === 'trash' && trashCount > 0) ? 'inline-flex' : 'none';
+    }
+
+    const listContainer = document.getElementById('adminInquiryList');
+    if (!listContainer) return;
+
+    // ------------------------------------------------------------------------
+    // A. Trash Filter View
+    // ------------------------------------------------------------------------
+    if (currentAdminFilter === 'trash') {
+      if (trashList.length === 0) {
+        listContainer.innerHTML = `
+          <div class="empty-inquiry-box">
+            <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🗑️</div>
+            <h4 style="font-size: 1.1rem; color: var(--accent-navy); margin-bottom: 0.3rem;">휴지통이 비어 있습니다</h4>
+            <p style="font-size: 0.88rem;">실수로 삭제된 강의 의뢰 내역은 이곳에 안전하게 보관되며 언제든 복원할 수 있습니다.</p>
+          </div>
+        `;
+        return;
+      }
+
+      listContainer.innerHTML = trashList.map(inq => {
+        const cleanPhone = (inq.clientPhone || '').replace(/[^0-9]/g, '');
+        const emailAddr = inq.clientEmail || '미기재';
+
+        return `
+          <article class="inquiry-card" data-id="${inq.id}" style="opacity: 0.9; border-left: 4px solid #94A3B8;">
+            <div class="inquiry-card-header">
+              <div class="inquiry-client-info">
+                <span class="client-name-badge">${escapeHtml(inq.clientName)}</span>
+                <span class="client-org-badge">${escapeHtml(inq.orgName || '소속 미기재')}</span>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">🕒 신청: ${escapeHtml(inq.createdAt || '-')}</span>
+              </div>
+              <div>
+                <span class="inquiry-status-badge trash">
+                  🗑 삭제보관 (${escapeHtml(inq.deletedAt || '최근')})
+                </span>
+              </div>
+            </div>
+
+            <div class="inquiry-meta-grid">
+              <div>
+                <div class="meta-item-label">희망 교육 분야</div>
+                <div class="meta-item-value" style="color: var(--accent-terracotta);">${escapeHtml(inq.courseTitle || '-')}</div>
+              </div>
+              <div>
+                <div class="meta-item-label">희망 교육 일정</div>
+                <div class="meta-item-value">${escapeHtml(inq.lectureDate || '협의')}</div>
+              </div>
+              <div>
+                <div class="meta-item-label">연락처</div>
+                <div class="meta-item-value">${escapeHtml(inq.clientPhone || '-')}</div>
+              </div>
+              <div>
+                <div class="meta-item-label">이메일 주소</div>
+                <div class="meta-item-value">${escapeHtml(emailAddr)}</div>
+              </div>
+              <div>
+                <div class="meta-item-label">예상 인원/대상</div>
+                <div class="meta-item-value">${escapeHtml(inq.audienceInfo || '미정')}</div>
+              </div>
+            </div>
+
+            <div class="inquiry-message-box">
+              ${escapeHtml(inq.messageContent || '')}
+            </div>
+
+            <div class="inquiry-actions-row">
+              <div class="action-contact-buttons">
+                <span style="font-size: 0.84rem; color: var(--text-muted); display: inline-flex; align-items: center;">
+                  ⚠️ 휴지통에 보관된 항목입니다. 복원 후 정상 응대가 가능합니다.
+                </span>
+              </div>
+
+              <div class="action-status-buttons">
+                <button type="button" class="btn-restore" data-action="restore" data-id="${inq.id}">
+                  ↺ 정상 복원하기
+                </button>
+                <button type="button" class="btn-delete-inquiry" data-action="perm-delete" data-id="${inq.id}" title="영구 삭제">
+                  ❌ 영구 삭제
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      listContainer.querySelectorAll('[data-action="restore"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          restoreFromTrash(id);
+        });
+      });
+
+      listContainer.querySelectorAll('[data-action="perm-delete"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          permanentDelete(id);
+        });
+      });
+
+      return;
+    }
+
+    // ------------------------------------------------------------------------
+    // B. Active Inquiries View (all, pending, completed)
+    // ------------------------------------------------------------------------
     const filteredInquiries = inquiries.filter(item => {
       if (currentAdminFilter === 'pending') return item.status === 'pending';
       if (currentAdminFilter === 'completed') return item.status === 'completed';
       return true;
     });
 
-    const listContainer = document.getElementById('adminInquiryList');
-    if (!listContainer) return;
-
     if (filteredInquiries.length === 0) {
       listContainer.innerHTML = `
         <div class="empty-inquiry-box">
           <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">📂</div>
           <h4 style="font-size: 1.1rem; color: var(--accent-navy); margin-bottom: 0.3rem;">접수된 신청 내역이 없습니다</h4>
-          <p style="font-size: 0.88rem;">새로운 강의 의뢰 신청이 들어오면 실시간으로 이곳에 표시됩니다.</p>
+          <p style="font-size: 0.88rem;">방문자가 웹사이트에서 강의를 신청하면 실시간으로 이곳에 등록됩니다.</p>
         </div>
       `;
       return;
@@ -550,6 +672,7 @@ document.addEventListener('DOMContentLoaded', () => {
     listContainer.innerHTML = filteredInquiries.map(inq => {
       const isPending = inq.status === 'pending';
       const cleanPhone = (inq.clientPhone || '').replace(/[^0-9]/g, '');
+      const emailAddr = inq.clientEmail || '미기재';
 
       return `
         <article class="inquiry-card" data-id="${inq.id}">
@@ -557,7 +680,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="inquiry-client-info">
               <span class="client-name-badge">${escapeHtml(inq.clientName)}</span>
               <span class="client-org-badge">${escapeHtml(inq.orgName || '소속 미기재')}</span>
-              <span style="font-size: 0.82rem; color: var(--text-muted);">🕒 ${inq.createdAt}</span>
+              <span style="font-size: 0.82rem; color: var(--text-muted);">🕒 접수일시: <strong>${escapeHtml(inq.createdAt || '-')}</strong></span>
             </div>
             <div>
               <span class="inquiry-status-badge ${isPending ? 'pending' : 'completed'}">
@@ -569,42 +692,57 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="inquiry-meta-grid">
             <div>
               <div class="meta-item-label">희망 교육 분야</div>
-              <div class="meta-item-value" style="color: var(--accent-terracotta);">${escapeHtml(inq.courseTitle)}</div>
+              <div class="meta-item-value" style="color: var(--accent-terracotta);">${escapeHtml(inq.courseTitle || '-')}</div>
             </div>
             <div>
               <div class="meta-item-label">희망 교육 일정</div>
               <div class="meta-item-value">${escapeHtml(inq.lectureDate || '협의')}</div>
             </div>
             <div>
-              <div class="meta-item-label">예상 인원/대상</div>
-              <div class="meta-item-value">${escapeHtml(inq.audienceInfo || '미정')}</div>
+              <div class="meta-item-label">연락처</div>
+              <div class="meta-item-value">${escapeHtml(inq.clientPhone || '-')}</div>
             </div>
             <div>
-              <div class="meta-item-label">연락처</div>
-              <div class="meta-item-value">${escapeHtml(inq.clientPhone)}</div>
+              <div class="meta-item-label">이메일 주소</div>
+              <div class="meta-item-value">
+                ${inq.clientEmail ? `<a href="mailto:${escapeHtml(inq.clientEmail)}" style="color: var(--trust-blue); font-weight: 700; text-decoration: underline;">${escapeHtml(inq.clientEmail)}</a>` : '미기재'}
+              </div>
+            </div>
+            <div>
+              <div class="meta-item-label">소속 기관</div>
+              <div class="meta-item-value">${escapeHtml(inq.orgName || '개인')}</div>
+            </div>
+            <div>
+              <div class="meta-item-label">예상 인원/대상</div>
+              <div class="meta-item-value">${escapeHtml(inq.audienceInfo || '미정')}</div>
             </div>
           </div>
 
           <div class="inquiry-message-box">
-            ${escapeHtml(inq.messageContent)}
+            ${escapeHtml(inq.messageContent || '')}
           </div>
 
           <div class="inquiry-actions-row">
             <div class="action-contact-buttons">
               <a href="tel:${cleanPhone}" class="btn-action-phone">
-                📞 전화걸기 (${escapeHtml(inq.clientPhone)})
+                📞 전화걸기
               </a>
               <a href="sms:${cleanPhone}" class="btn-action-sms">
-                💬 문자 보내기
+                💬 문자 발송
               </a>
+              ${inq.clientEmail ? `
+                <a href="mailto:${escapeHtml(inq.clientEmail)}" class="btn-action-email">
+                  📧 이메일 발송
+                </a>
+              ` : ''}
             </div>
 
             <div class="action-status-buttons">
               <button type="button" class="btn-toggle-status" data-action="toggle-status" data-id="${inq.id}">
                 ${isPending ? '✓ [상담완료]로 변경' : '↺ [대기중]으로 되돌리기'}
               </button>
-              <button type="button" class="btn-delete-inquiry" data-action="delete" data-id="${inq.id}" title="내역 삭제">
-                🗑 삭제
+              <button type="button" class="btn-delete-inquiry" data-action="delete" data-id="${inq.id}" title="휴지통으로 이동">
+                🗑 휴지통으로
               </button>
             </div>
           </div>
@@ -640,16 +778,73 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast(`신청 상태가 '${item.status === 'completed' ? '상담완료' : '상담대기'}'(으)로 변경되었습니다.`, '✦');
   };
 
-  // Delete
+  // Move to Trash (Safe Delete)
   const deleteInquiry = (id) => {
-    if (!confirm('이 강의 의뢰 내역을 삭제하시겠습니까? (삭제 후 복구할 수 없습니다)')) return;
-
     const list = getStoredInquiries();
-    const updated = list.filter(i => i.id !== id);
-    saveInquiries(updated);
+    const item = list.find(i => i.id === id);
+    if (!item) return;
+
+    if (!confirm(`'${item.clientName}' 님의 신청 내역을 휴지통으로 이동하시겠습니까?\n(휴지통 탭에서 언제든 복원할 수 있습니다)`)) return;
+
+    const updatedActive = list.filter(i => i.id !== id);
+    saveInquiries(updatedActive);
+
+    const trashList = getTrashInquiries();
+    item.deletedAt = getFullFormattedDate();
+    trashList.unshift(item);
+    saveTrashInquiries(trashList);
+
     renderAdminDashboard();
-    showToast('의뢰 내역이 삭제되었습니다.', '🗑');
+    showToast(`'${item.clientName}' 님의 신청서가 휴지통으로 이동되었습니다.`, '🗑');
   };
+
+  // Restore From Trash
+  const restoreFromTrash = (id) => {
+    const trashList = getTrashInquiries();
+    const item = trashList.find(i => i.id === id);
+    if (!item) return;
+
+    const updatedTrash = trashList.filter(i => i.id !== id);
+    saveTrashInquiries(updatedTrash);
+
+    const activeList = getStoredInquiries();
+    delete item.deletedAt;
+    activeList.unshift(item);
+    saveInquiries(activeList);
+
+    renderAdminDashboard();
+    showToast(`'${item.clientName}' 님의 내역이 정상 복원되었습니다.`, '↺');
+  };
+
+  // Permanent Delete
+  const permanentDelete = (id) => {
+    const trashList = getTrashInquiries();
+    const item = trashList.find(i => i.id === id);
+    if (!item) return;
+
+    if (!confirm(`이 내역을 영구 삭제하시겠습니까?\n영구 삭제 후에는 다시 복구할 수 없습니다.`)) return;
+
+    const updatedTrash = trashList.filter(i => i.id !== id);
+    saveTrashInquiries(updatedTrash);
+
+    renderAdminDashboard();
+    showToast('신청 내역이 완전히 영구 삭제되었습니다.', '✕');
+  };
+
+  // Empty Entire Trash
+  const emptyTrashBtn = document.getElementById('emptyTrashBtn');
+  if (emptyTrashBtn) {
+    emptyTrashBtn.addEventListener('click', () => {
+      const trashList = getTrashInquiries();
+      if (trashList.length === 0) return;
+
+      if (!confirm(`휴지통에 보관된 ${trashList.length}건의 모든 내역을 완전히 비우시겠습니까?\n이 작업은 되돌릴 수 없습니다.`)) return;
+
+      saveTrashInquiries([]);
+      renderAdminDashboard();
+      showToast('휴지통을 모두 비웠습니다.', '🔥');
+    });
+  }
 
   // Filter Tabs
   document.querySelectorAll('.admin-tab').forEach(tab => {
@@ -667,18 +862,19 @@ document.addEventListener('DOMContentLoaded', () => {
     exportCsvBtn.addEventListener('click', () => {
       const inquiries = getStoredInquiries();
       if (inquiries.length === 0) {
-        showToast('내보낼 신청 데이터가 없습니다.', '!');
+        showToast('내보낼 실제 신청 데이터가 없습니다.', '!');
         return;
       }
 
-      const headers = ['접수일시', '상태', '의뢰인성함', '연락처', '소속기관', '희망교육분야', '희망일정', '인원대상', '문의상세내용'];
+      const headers = ['접수일시(년월일시분초)', '상태', '의뢰인성함', '연락처', '이메일', '소속기관', '희망교육분야', '희망일정', '인원대상', '문의상세내용'];
       const rows = inquiries.map(i => [
-        i.createdAt,
+        i.createdAt || '',
         i.status === 'completed' ? '상담완료' : '상담대기',
-        i.clientName,
-        i.clientPhone,
+        i.clientName || '',
+        i.clientPhone || '',
+        i.clientEmail || '',
         i.orgName || '',
-        i.courseTitle,
+        i.courseTitle || '',
         i.lectureDate || '',
         i.audienceInfo || '',
         (i.messageContent || '').replace(/"/g, '""').replace(/\n/g, ' ')

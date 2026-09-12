@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=4.2">
+  <link rel="stylesheet" href="styles.css?v=4.3">
 </head>
 <body>
 
@@ -755,16 +755,23 @@
                   <input type="text" id="clientName" class="form-control" placeholder="홍길동" required>
                 </div>
                 <div class="form-group">
-                  <label for="clientPhone" class="form-label">연락처 *</label>
+                  <label for="clientPhone" class="form-label">연락처 (휴대폰) *</label>
                   <input type="tel" id="clientPhone" class="form-control" placeholder="010-0000-0000" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
+                  <label for="clientEmail" class="form-label">이메일 주소 *</label>
+                  <input type="email" id="clientEmail" class="form-control" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
                   <label for="orgName" class="form-label">소속 기관명 / 기업명</label>
                   <input type="text" id="orgName" class="form-control" placeholder="○○구청 / ○○복지관 / 개인">
                 </div>
+              </div>
+
+              <div class="form-row">
                 <div class="form-group">
                   <label for="courseSelect" class="form-label">희망 교육 분야 *</label>
                   <select id="courseSelect" class="form-control" required>
@@ -775,17 +782,15 @@
                     <option value="custom">맞춤형 1:1 개인 코칭 및 기타 컨설팅</option>
                   </select>
                 </div>
-              </div>
-
-              <div class="form-row">
                 <div class="form-group">
                   <label for="lectureDate" class="form-label">희망 교육 일정 (대략)</label>
                   <input type="text" id="lectureDate" class="form-control" placeholder="예: 10월 중순 평일 오전">
                 </div>
-                <div class="form-group">
-                  <label for="audienceInfo" class="form-label">예상 교육 인원 및 대상</label>
-                  <input type="text" id="audienceInfo" class="form-control" placeholder="예: 시니어 주민 20명 / 임직원 15명">
-                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="audienceInfo" class="form-label">예상 교육 인원 및 대상</label>
+                <input type="text" id="audienceInfo" class="form-control" placeholder="예: 시니어 주민 20명 / 임직원 15명">
               </div>
 
               <div class="form-group">
@@ -913,11 +918,11 @@
       <form id="adminLoginForm">
         <div class="form-group">
           <label for="adminId" class="form-label">관리자 아이디</label>
-          <input type="text" id="adminId" class="form-control" placeholder="아이디 입력 (daonsam)" required>
+          <input type="text" id="adminId" class="form-control" placeholder="관리자 아이디를 입력하세요" autocomplete="username" required>
         </div>
         <div class="form-group">
           <label for="adminPw" class="form-label">비밀번호</label>
-          <input type="password" id="adminPw" class="form-control" placeholder="비밀번호 입력" required>
+          <input type="password" id="adminPw" class="form-control" placeholder="비밀번호 입력" autocomplete="current-password" required>
         </div>
 
         <div id="loginErrorMsg" class="admin-error-msg" style="display: none;">
@@ -927,10 +932,6 @@
         <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.8rem;">
           대시보드 로그인
         </button>
-
-        <div style="text-align: center; margin-top: 1.2rem; font-size: 0.8rem; color: var(--text-muted); background: var(--bg-secondary); padding: 0.6rem; border-radius: var(--radius-sm);">
-          운영자 전용 인증 시스템: <strong>daonsam</strong>
-        </div>
       </form>
     </div>
   </div>
@@ -968,6 +969,10 @@
           <div class="stat-label">상담 및 조율 완료</div>
           <div class="stat-num" id="statCompletedCount">0</div>
         </div>
+        <div class="admin-stat-card trash">
+          <div class="stat-label">휴지통 보관</div>
+          <div class="stat-num" id="statTrashCount">0</div>
+        </div>
       </div>
 
       <!-- Filter Tabs -->
@@ -976,9 +981,15 @@
           <button type="button" class="admin-tab active" data-status="all">전체 내역 (<span id="tabCountAll">0</span>)</button>
           <button type="button" class="admin-tab" data-status="pending">상담 대기 (<span id="tabCountPending">0</span>)</button>
           <button type="button" class="admin-tab" data-status="completed">완료 건 (<span id="tabCountCompleted">0</span>)</button>
+          <button type="button" class="admin-tab trash-tab" data-status="trash">🗑 휴지통 (<span id="tabCountTrash">0</span>)</button>
         </div>
-        <div style="font-size: 0.82rem; color: var(--text-muted);">
-          * 접수된 데이터는 브라우저(localStorage)에 안전하게 보관됩니다.
+        <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-danger-outline" id="emptyTrashBtn" style="display: none;" title="휴지통의 모든 내역을 완전히 삭제합니다">
+            🔥 휴지통 전체 비우기
+          </button>
+          <div style="font-size: 0.82rem; color: var(--text-muted);">
+            * 접수된 데이터는 브라우저(localStorage)에 안전하게 보관됩니다.
+          </div>
         </div>
       </div>
 
@@ -1009,6 +1020,6 @@
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
   <!-- JavaScript Application -->
-  <script src="app.js?v=2.2"></script>
+  <script src="app.js?v=2.3"></script>
 </body>
 </html>

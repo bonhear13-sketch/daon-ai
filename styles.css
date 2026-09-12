@@ -1947,6 +1947,10 @@ textarea.form-control {
   color: var(--accent-green);
 }
 
+.admin-stat-card.trash .stat-num {
+  color: #64748B;
+}
+
 .admin-filter-bar {
   display: flex;
   align-items: center;
@@ -1977,6 +1981,15 @@ textarea.form-control {
 
 .admin-tab.active {
   background: var(--accent-navy);
+  color: #FFFFFF;
+}
+
+.admin-tab.trash-tab:hover {
+  color: #DC2626;
+}
+
+.admin-tab.trash-tab.active {
+  background: #DC2626;
   color: #FFFFFF;
 }
 
@@ -2052,9 +2065,15 @@ textarea.form-control {
   border: 1px solid rgba(59, 122, 87, 0.3);
 }
 
+.inquiry-status-badge.trash {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #CBD5E1;
+}
+
 .inquiry-meta-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 0.8rem;
   background: var(--bg-secondary);
   padding: 0.9rem 1.2rem;
@@ -2132,9 +2151,30 @@ textarea.form-control {
   background: var(--bg-tertiary);
 }
 
+.btn-action-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.9rem;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid #BFDBFE;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.btn-action-email:hover {
+  background: #DBEAFE;
+  color: #1E40AF;
+}
+
 .action-status-buttons {
   display: flex;
   gap: 0.6rem;
+  flex-wrap: wrap;
 }
 
 .btn-toggle-status {
@@ -2161,10 +2201,54 @@ textarea.form-control {
   font-weight: 600;
   color: #C0392B;
   background: #FDEDEC;
+  border: 1px solid #FADBD8;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 .btn-delete-inquiry:hover {
   background: #FADBD8;
+  color: #962D22;
+}
+
+.btn-restore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.9rem;
+  background: #ECFDF5;
+  color: #065F46;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid #A7F3D0;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-restore:hover {
+  background: #D1FAE5;
+  color: #047857;
+}
+
+.btn-danger-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #DC2626;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-danger-outline:hover {
+  background: #FEE2E2;
+  border-color: #F87171;
 }
 
 .empty-inquiry-box {
